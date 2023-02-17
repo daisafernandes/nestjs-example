@@ -11,10 +11,11 @@ export class BookService {
     return Promise.resolve(this.books);
   }
 
-  async findById(bookId: number): Promise<BookDTO> {
-    const book = this.books.find((b) => b.id === bookId);
+  async findById(bookId: string): Promise<BookDTO> {
+    const id = Number(bookId);
+    const book = this.books.find((b) => b.id === id);
     if (!book) {
-      throw new NotFoundException('Book does not exist!');
+      throw new NotFoundException(`Book id ${bookId} does not exist!`);
     }
     return Promise.resolve(book);
   }
@@ -23,10 +24,13 @@ export class BookService {
     Promise.resolve(this.books.push(book));
   }
 
-  async delete(bookId: number): Promise<void> {
-    const index = this.books.findIndex((b) => b.id === bookId);
+  async delete(bookId: string): Promise<void> {
+    const id = Number(bookId);
+    const index = this.books.findIndex((b) => b.id === id);
     if (index < 0) {
-      return Promise.reject(new NotFoundException(`Book ${bookId} not found.`));
+      return Promise.reject(
+        new NotFoundException(`Book id ${bookId} does not exist!`),
+      );
     }
     Promise.resolve(this.books.splice(index, 1));
   }

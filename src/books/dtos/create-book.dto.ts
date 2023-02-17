@@ -4,7 +4,7 @@ export class CreateBookDTO {
   @IsNumber()
   readonly id: number;
 
-  @IsNotEmpty({ message: 'title can not be empty' })
+  @IsNotEmpty({ message: 'não pode ser vazio' })
   @MaxLength(50)
   readonly title: string;
 
