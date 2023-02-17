@@ -1,25 +1,34 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
-import { BOOKS } from '../database/books';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { BOOKS_DATA } from '../database/books-data';
 import { BookDTO } from '../dtos/book.dto';
 import { CreateBookDTO } from '../dtos/create-book.dto';
 
 @Injectable()
 export class BookService {
-  books = BOOKS;
+  books: BookDTO[] = BOOKS_DATA;
 
-  async getBooks(): Promise<BookDTO[]> {
-    return this.books;
+  async findAll(): Promise<BookDTO[]> {
+    return Promise.resolve(this.books);
   }
 
-  async getBook(bookId: number): Promise<BookDTO> {
-    const book = this.books.find((book) => book.id === bookId);
+  async findById(bookId: number): Promise<BookDTO> {
+    const book = this.books.find((b) => b.id === bookId);
     if (!book) {
       throw new NotFoundException('Book does not exist!');
     }
-    return book;
+    return Promise.resolve(book);
   }
 
-  async addBook(book: CreateBookDTO): Promise<void> {
-    this.books.push(book);
+  async create(book: CreateBookDTO): Promise<void> {
+    Promise.resolve(this.books.push(book));
+  }
+
+  async delete(bookId: number): Promise<void> {
+    const index = this.books.findIndex((b) => b.id === bookId);
+    if (index < 0) {
+      return Promise.reject(new NotFoundException(`Book ${bookId} not found.`));
+    }
+    this.books.splice(index, 1);
+    return Promise.resolve();
   }
 }

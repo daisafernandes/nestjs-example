@@ -1,4 +1,6 @@
-export const BOOKS = [
+import { BookDTO } from '../dtos/book.dto';
+
+export const BOOKS_DATA: BookDTO[] = [
   {
     id: 1,
     title: "Harry Potter and the Philosopher's Stone",
