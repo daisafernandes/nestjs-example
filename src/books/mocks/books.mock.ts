@@ -1,13 +1,13 @@
-import { BookDTO } from '../dtos/book.dto';
+import { Book } from '../interfaces/book.interface';
 
-export const mockBook: BookDTO = {
+export const mockBook: Book = {
   id: 1,
   title: "Harry Potter and the Philosopher's Stone",
   description: 'This is the description for the first book',
   author: 'J.K. Rowling',
 };
 
-export const mockBookList: BookDTO[] = [
+export const mockBookList: Book[] = [
   {
     id: 1,
     title: "Harry Potter and the Philosopher's Stone",

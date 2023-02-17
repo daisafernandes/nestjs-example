@@ -1,4 +1,3 @@
-import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mockBook } from '../mocks/books.mock';
 import { BookService } from './book.service';
@@ -21,12 +20,12 @@ describe('BookService', () => {
 
   describe('root', () => {
     it('should return a book', async () => {
-      expect(await service.getBook(1)).toMatchObject(mockBook);
+      expect(await service.findById('1')).toMatchObject(mockBook);
     });
 
     it('should return an NotFoundException', async () => {
-      await expect(service.getBook(20)).rejects.toThrowError(
-        'Book does not exist!',
+      await expect(service.findById('20')).rejects.toThrowError(
+        'Book id 20 does not exist!',
       );
     });
   });

@@ -21,7 +21,7 @@ describe('BookController', () => {
 
   describe('root', () => {
     it('should return a book', async () => {
-      expect(await controller.getBook(1)).toMatchObject(mockBook);
+      expect(await controller.getBook('1')).toMatchObject(mockBook);
     });
 
     it('should return a list of books', async () => {
