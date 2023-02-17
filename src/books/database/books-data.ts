@@ -1,6 +1,6 @@
-import { Book } from '../interfaces/book.interface';
+import { BookDTO } from '../dtos/book.dto';
 
-export const BOOKS_DATA: Book[] = [
+export const BOOKS_DATA: BookDTO[] = [
   {
     id: 1,
     title: "Harry Potter and the Philosopher's Stone",

@@ -1,17 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { BOOKS_DATA } from '../database/books-data';
+import { BookDTO } from '../dtos/book.dto';
 import { CreateBookDTO } from '../dtos/create-book.dto';
-import { Book } from '../interfaces/book.interface';
 
 @Injectable()
 export class BookService {
-  books: Book[] = BOOKS_DATA;
+  books: BookDTO[] = BOOKS_DATA;
 
-  async findAll(): Promise<Book[]> {
+  async findAll(): Promise<BookDTO[]> {
     return Promise.resolve(this.books);
   }
 
-  async findById(bookId: string): Promise<Book> {
+  async findById(bookId: string): Promise<BookDTO> {
     const id = Number(bookId);
     const book = this.books.find((b) => b.id === id);
     if (!book) {
