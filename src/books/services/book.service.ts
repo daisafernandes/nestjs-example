@@ -28,7 +28,6 @@ export class BookService {
     if (index < 0) {
       return Promise.reject(new NotFoundException(`Book ${bookId} not found.`));
     }
-    this.books.splice(index, 1);
-    return Promise.resolve();
+    Promise.resolve(this.books.splice(index, 1));
   }
 }
